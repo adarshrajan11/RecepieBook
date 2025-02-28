@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sigmar&display=swap');
+
+body {
+  font-family: 'Playwrite IT Moderna', serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+.calculator {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.display {
+  background-color: #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+}
+
+.button {
+  padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+
+/* style for user component */
+th,
+td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+img {
+  width: 50px;
+  height: 50px;
+
+}
