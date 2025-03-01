@@ -26,6 +26,7 @@ const ApiRender: React.FC = () => {
             .then((response) => {
                 setCategories(response.data.meals);
                 setLoading(false);
+                fetchMeals("Beef");
             })
             .catch((error) => {
                 console.error("Error fetching meal categories:", error);
@@ -46,6 +47,7 @@ const ApiRender: React.FC = () => {
                 setLoading(false);
             });
     };
+
 
 
     return (
