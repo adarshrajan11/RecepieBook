@@ -17,6 +17,8 @@ interface Meal {
 const ApiRender: React.FC = () => {
     const [categories, setCategories] = useState<MealCategory[]>([]);
     const [meals, setMeals] = useState<Meal[]>([]);
+    const [searcMeals, setSearchMeals] = useState<Meal[]>([]);
+
     const [selectedCategory, setSelectedCategory] = useState<string | null>();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -48,11 +50,50 @@ const ApiRender: React.FC = () => {
             });
     };
 
+    const handleSearch = async (query: string) => {
+        if (query.trim() === '') {
+            setSearchMeals([]);
+            return;
+        }
 
+        setLoading(true);
+        try {
+            const response = await axios.get(
+                `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
+            );
+            setSearchMeals(response.data.meals || []); // Set meals or an empty array if no results
+        } catch (error) {
+            console.error('Error fetching search results:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    console.log("search object", searcMeals)
 
     return (
         <>
+            <Navbar onSearch={handleSearch} />
+            {searcMeals.length ? (<div style={styles.container}>
+                <h1 style={styles.title}>Search Results</h1>
+                {loading && <p>Loading...</p>}
 
+                {/* Meals Grid */}
+                <div style={styles.mealsGrid}>
+                    {searcMeals.map((meal) => (
+                        <Link key={meal.idMeal} to={`meal/${meal.idMeal}`} style={{ textDecoration: "none", margin: "10px" }}>
+                            <div key={meal.idMeal} style={styles.mealCard}>
+                                <img
+                                    src={meal.strMealThumb}
+                                    alt={meal.strMeal}
+                                    style={styles.mealImage}
+                                />
+                                <h3 style={styles.mealName}>{meal.strMeal}</h3>
+                            </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>) : ""
+            }
             <div style={styles.container}>
                 <h1 style={styles.title}>Meal Categories</h1>
                 {loading && <Loader />}

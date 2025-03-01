@@ -7,7 +7,7 @@ import MealDetails from './component/MealDetails';
 function App() {
   return (
     <BrowserRouter>
-      <Navbar /> {/* Navbar remains visible on all pages */}
+
       <Routes>
         <Route path="/" element={<ApiRender />} />
         <Route path="/meal/:id" element={<MealDetails />} />
